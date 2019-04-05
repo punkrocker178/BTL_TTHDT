@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class Main {
+public class Network_Flow {
 
     private static LinkedList<Vertex>[] vertexLinkedList;
     private static boolean[] visited;
@@ -25,28 +25,29 @@ public class Main {
     public static void readGraph(){
         Scanner sc;
         String line = "";
-        int index=0,vertexName=0,vertexWeight=0;
-        String[] vertices,weight;
+        int index=0,vertex_weight=0,vertex_src=0,vertex_des=0;
+        String[] path,weight;
 
         try {
             sc = new Scanner(new File("resources/Graph.txt"));
-            int numVertex = Integer.parseInt(sc.nextLine());
+            String init = sc.nextLine();
+            String[] init_array = init.split(" ");
+            int numVertex = Integer.parseInt(init_array[0]);
+            int numEdge = Integer.parseInt(init_array[1]);
             initArrayLinkedList(numVertex);
             while (sc.hasNextLine()){
                 line = sc.nextLine();
-                vertices = line.split("[ :]");
-                for(int v=0;v<vertices.length;v=v+2){
-                    vertexName = Integer.parseInt(vertices[v].trim());
-                    vertexWeight = Integer.parseInt(vertices[v+1].trim());
-                    vertexLinkedList[index].add(new Vertex(vertexName,vertexWeight));
-                }
-                index++;
+                path = line.split(" ");
+                vertex_src = Integer.parseInt(path[0]);
+                vertex_des = Integer.parseInt(path[1]);
+                vertex_weight = Integer.parseInt(path[2]);
+                vertexLinkedList[vertex_src].add(new Vertex(vertex_des,vertex_weight));
+
             }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     public static boolean BFS(LinkedList<Vertex>[] residualGraph,int source,int target,int[] parent){
