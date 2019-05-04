@@ -75,20 +75,6 @@ public class Network_Flow {
             return false;
         }
         return true;
-        //Trace path
-//        System.out.println(Arrays.toString(parent));
-//        String path = ""+(parent.length-1);
-//        int value=0,index = parent[parent.length-1] ;
-//            while(true){
-//                value = index;
-//                index = parent[value];
-//                path = path+" "+value;
-//
-//                if(value==parent[0]){
-//                    break;
-//                }
-//            }
-//        System.out.print(path+" ");
 
     }
 
